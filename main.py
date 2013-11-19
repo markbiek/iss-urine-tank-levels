@@ -13,7 +13,9 @@ How to launch Xvfb:
     export DISPLAY=:1
 
 This Stackoverflow question (http://stackoverflow.com/a/4474362/305) has a great example of how to
-generate Twitter access tokens and interactive with Twitter
+generate Twitter access tokens and interactive with Twitter.
+
+Latest Twitter api module (which uses v1.1) is on github https://github.com/bear/python-twitter
 """
 
 from HTMLParser import HTMLParser
