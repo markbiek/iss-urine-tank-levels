@@ -8,20 +8,6 @@ import time
 import sys
 import twitter
 
-class MLStripper(HTMLParser):
-    def __init__(self):
-        self.reset()
-        self.fed = []
-    def handle_data(self, d):
-        self.fed.append(d)
-    def get_data(self):
-        return ''.join(self.fed)
-
-def strip_tags(html):
-    s = MLStripper()
-    s.feed(html)
-    return s.get_data()
-
 def loadAccessToken():
     vals = {}
 
@@ -33,6 +19,10 @@ def loadAccessToken():
 
 #Check to see if we have a connection to the ISS
 def checkIssStatus():
+    """Looks like we get data on the page even if there's a No Signal message.
+    Temporarily disabling this function until we figure it out"""
+    return True
+    """
     url = "http://spacestationlive.nasa.gov/status.indicator.html"
 
     browser = webdriver.Firefox()
@@ -44,6 +34,7 @@ def checkIssStatus():
     divStatus = soup.find(attrs={'class': 'los-state'})
 
     return "No signal" not in divStatus
+    """
 
 if __name__ == "__main__":
     tokens = loadAccessToken()
@@ -69,7 +60,9 @@ if __name__ == "__main__":
         
         soup = BeautifulSoup(browser.page_source)
         spanUPA = soup.find("span", {"id": "NODE3000005"})
-        print spanUPA
+        upaPer = spanUPA.text.strip()
+        if re.search(r'^\d+\.*\d*%$', upaPer):
+            status = "The ISS Urine Tank is currently " + spanUPA.text + " full."
     else:
         print "No connection to the ISS"
         sys.exit(3)
