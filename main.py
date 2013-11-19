@@ -10,8 +10,12 @@ import twitter
 
 def loadAccessToken():
     vals = {}
+    tokenFile = 'access.token'
 
-    for line in open('access.token'):
+    if len(sys.argv) > 1:
+        tokenFile = sys.argv[1]
+
+    for line in open(tokenFile):
         (key, val) = line.strip().split('=')
         vals[key] = val
 
@@ -62,7 +66,7 @@ if __name__ == "__main__":
         spanUPA = soup.find("span", {"id": "NODE3000005"})
         upaPer = spanUPA.text.strip()
         if re.search(r'^\d+\.*\d*%$', upaPer):
-            status = "The ISS Urine Tank is currently " + spanUPA.text + " full."
+            status = time.strftime("%Y-%m-%d %H:%M:%S") + " - The ISS Urine Tank is currently " + spanUPA.text + " full."
     else:
         print "No connection to the ISS"
         sys.exit(3)
