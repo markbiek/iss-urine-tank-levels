@@ -71,12 +71,16 @@ if __name__ == "__main__":
         spanUPA = soup.find("span", {"id": "NODE3000005"})
         print spanUPA
     else:
-        status = "No connection to the ISS"
+        print "No connection to the ISS"
+        sys.exit(3)
 
     if status !="":
         ret = api.PostUpdate(status)
-        print ret
-        sys.exit(0)
+        if ret is None:
+            print "WARNING: PostUpdate returned None. Your post may have failed."
+            sys.exit(2)
     else:
         print "ERROR: Invalid empty status."
         sys.exit(1)
+
+    sys.exit(0)
