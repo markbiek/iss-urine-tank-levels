@@ -3,6 +3,7 @@
 from HTMLParser import HTMLParser
 from BeautifulSoup import BeautifulSoup
 from selenium import webdriver
+import os
 import re
 import time
 import sys
@@ -48,6 +49,8 @@ if __name__ == "__main__":
             "consumer_secret" not in tokens.keys()):
         print "ERROR: Invalid access token file."
         sys.exit(1)
+
+    os.environ['DISPLAY'] = ':1'
 
     api = twitter.Api(consumer_key=tokens['consumer_key'],
                         consumer_secret=tokens['consumer_secret'],
