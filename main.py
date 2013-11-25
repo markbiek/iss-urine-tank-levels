@@ -70,6 +70,8 @@ if __name__ == "__main__":
         upaPer = spanUPA.text.strip()
         if re.search(r'^\d+\.*\d*%$', upaPer):
             status = time.strftime("%Y-%m-%d %H:%M:%S") + " - The ISS Urine Tank is currently " + spanUPA.text + " full."
+
+        browser.quit()
     else:
         print "No connection to the ISS"
         sys.exit(3)
