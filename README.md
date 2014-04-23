@@ -11,6 +11,12 @@ How to launch Xvfb:
 
     export DISPLAY=:1
 
+There are some incompatibilities with the latest version of Firefox and older versions of Selenium.
+
+[http://stackoverflow.com/questions/20957968/python-selenium-firefox-webdriver-failing-with-error-cant-load-the-profile](http://stackoverflow.com/questions/20957968/python-selenium-firefox-webdriver-failing-with-error-cant-load-the-profile)
+
+If you get Firefox profile related errors, you may need to update Selenium.
+
 This Stackoverflow question (http://stackoverflow.com/a/4474362/305) has a great example of how to
 generate Twitter access tokens and interact with Twitter.
 
